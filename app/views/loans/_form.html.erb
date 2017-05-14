@@ -1,0 +1,188 @@
+<div class='ui center aligned segment loan-form'>
+<%= form_for(loan) do |f| %>
+  <% if loan.errors.any? %>
+    <div id="error_explanation">
+      <h2>Oops! Your loan application has <%= pluralize(loan.errors.count, "error") %>:</h2>
+
+      <ul>
+      <% loan.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% if !current_user.superuser? && params['action'] == 'edit' %>
+    <div>Are you sure you want to return your loan? We will reach out to you in Steam to initiate the trade.</div>
+
+    <div class="actions loan-submit-container">
+      <%= f.submit 'class': 'ui primary button' %>
+    </div>
+  <% else %>
+
+
+
+    <% if current_user.superuser? %>
+      <div class="field">
+        <%= f.label :status %>
+        <%= f.select :status, ['pending', 'accepted', 'rejected', 'defaulted'], {}, class: 'form-control'%>
+      </div>
+    <% end %>
+
+    <!--
+    <div class="field">
+      <%= f.label 'Key amount:' %>
+
+       <%= f.text_field :keys,
+          "class": "span2",
+          "data-slider-min": 0,
+          "data-provide": "slider",
+          "data-slider-step": 1,
+          "data-slider-max": 5,
+          "data-slider-value": f.object.keys || 0.0,
+          required: true
+      %> -->
+
+
+      <div class="field">
+        <%= f.label 'Key amount:' %>
+        <%= f.text_field :keys, 'class': 'form-control', required: true %>
+      </div>
+
+    <div class="field">
+      <%= f.label 'Loan due date:' %>
+      <%= f.text_field :due_at,
+          'value': f.object.due_at ? f.object.due_at.strftime("%m/%d/%Y") : '',
+          'data-provide': 'datepicker',
+          'class': 'datepicker form-control',
+          'data-date-autoclose': true,
+          'data-date-max-view-mode': 1,
+          'data-date-start-date': Time.now.strftime("%m/%d/%Y"),
+          'data-date-end-date': (Time.now + 1.week).strftime("%m/%d/%Y"),
+          required: true
+      %>
+    </div>
+
+    <div class="field">
+      <%= f.label 'Collateral item name:' %>
+      <%= f.text_field :collateral, 'class': 'form-control', required: true %>
+    </div>
+
+    <div class="collateral-blurb">
+    Please note that we require 80% collateral of the loan amount. For example, we expect you to put up skins worth $180 on a $100 (1.8 x $100) key loan (40 keys)
+    </div>
+    <a class="btn btn-primary btn-sm collateral-button" data-toggle="modal" data-target="#modal-collateral">
+  Click here for collateral calculator
+</a>
+
+    <br>
+
+    <div class="field">
+      <%= f.label 'Why do you need a loan?' %>
+      <%= f.text_area :why_loan, 'class': 'form-control form-textarea', required: true%>
+    </div>
+
+    <% if params['action'] != 'edit' %>
+      <% if current_user.total_points > 100 %>
+        <div>You currently have <%= current_user.total_points %> Points, which is good for <%= pluralize(current_user.total_points / 100, "key") %>. Would you like to redeem them now?</div>
+        <div class="field">
+          <%= f.label 'Keys to Redeem' %>
+          <%= f.text_field :points_used, 'class': 'form-control' %>
+        </div>
+      <% end %>
+
+      <% if params['action'] != 'edit' %>
+        <%= f.check_box :terms %> I agree to the <a data-toggle="modal" data-target="#myModal">terms and conditions</a>
+      <% end %>
+    <% end %>
+
+    <div class="actions loan-submit-container">
+      <%= f.submit 'class': 'ui primary button' %>
+    </div>
+<% end %>
+<% end %>
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade submitted-modal" id="modal-collateral" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Collateral calculator</h4>
+      </div>
+      <div class="modal-body">
+        <div>Enter the number of keys you want:</div>
+        <input class='form-control collateral-amount'/>
+        <button type="button" class="btn btn-primary btn-sm collateral-calculator">Calculate!</button>
+        <script>
+          $('.collateral-calculator').click(function(e) {
+            $('.collateral-result').text(Math.round(parseInt($('.collateral-amount').val()) * 1.8));
+          });
+        </script>
+        <div class='collateral-result-container'>
+          <div>Keys worth of collateral needed:</div>
+          <div class="collateral-result"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+<!-- Modal -->
+<div class="modal fade" data-backdrop="false" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Terms and Conditions</h4>
+      </div>
+      <div class="modal-body">
+        <p>
+          This contract between CSGOkeybank.com, hereafter known as “The Key Lender,” and you, hereafter known as “The Key Borrower,” constitutes a binding digital key loan agreement in which digital downloadable content, known as “keys,” are loaned for a period of day(s) agreed upon between both The Key Lender and The Key Borrower. Further, the Key Borrower agrees to the following terms:
+        </p>
+        <ul>
+          <li>
+            The Key Borrower agrees to repay the key loan in full and the interest of 1% of the initial total key loan amount per 24-hour period (rounded up for key calculation purposes) on or before the agreed date (Eastern Standard Time) between The Key Borrower and The Key Lender.
+          </li>
+          <li>
+            The Key Borrower acknowledges that key loan payment schedule is enforceable by the methods described below for uses in situations of delinquent payment.
+          </li>
+          <li>
+            The Key Borrower acknowledges that CSGO Key Bank key loans aren’t real-world cash loans or transactions.
+          </li>
+          <li>
+            The Key Borrower acknowledges that CSGO Key Bank key loans are transacted in Steam, a digital game distribution platform by Valve Corporation.
+          </li>
+          <li>
+            The Key Borrower acknowledges that “keys” are digital downloadable content that are non-physical objects which can only be used in the virtual world of Counter Strike: Global Offensive.
+          </li>
+        </ul>
+        <p>
+          It is agreed that on the initial date signed below, the key loan will take effect. Digital collateral (Steam items) held during this time is property of The Borrower except in cases of delinquent payment. When The Key Lender returns the outstanding key loan balance in full, the digital collateral will be returned to The Key Borrower via a direct Stream trade between both parties. The Key Lender may credit The Key Borrower’s account with additional key borrowing opportunities based on its loan history.
+        </p>
+        <p>
+          Cases of delinquent digital payment are defined as key payments and the associated late fees NOT made in full within 48 hours of the loan due date and time. In this case, all digital collateral held by The Key Lender becomes property of The Key Lender without exception.
+        </p>
+        <p>
+          The Key Borrower may, upon paying the late fees (2% of the key loan per every 24-hour period past the initial due date) and the initial loan amount, recover his/her collateral ONLY within 72 hours of key loan expiration or 24 hours after the key loan is defined as delinquent. After the 72 hours, the digital collateral becomes property of The Key Lender.
+        </p>
+        <p>
+          In cases of delinquent key payment, The Key Lender reserves the right to report The Key Borrower to Steamrep.com, a third party user reputation catalogue regarding the key loan default. Steamrep.com may, at its discretion, issue a report, negative reputation, or Steamrep.com ban on The Key Borrower. The Key Lender also reserves the right to communicate on the borrower’s “Cash Rep” thread in the Steam community page regarding the loan delinquency, as The Key Borrower agrees under the signed agreement that the transaction constitutes a “cash transaction.”
+        </p>
+        <p>
+          Under this key loan agreement, The Key Borrower agrees to a voluntary key loan of assorted CSGO Case Keys, set at $2.50 USD, for a set start and end date agreed by both The Key Lender and The Key Borrower. Furthermore, both The Key Borrower and The Key Lender agree to the terms outlined above.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

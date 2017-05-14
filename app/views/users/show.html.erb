@@ -1,0 +1,68 @@
+<a href="/dashboard" class='ui primary button'>< Back to Dashboard</a>
+
+<div class='user-detail'>
+  <h3>User: <%= @user.email %></h3>
+  <table class="ui celled striped table">
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Phone Number</th>
+        <th>Date Created</th>
+        <th>Steam Profile Url</th>
+        <th>Trade Url</th>
+        <th>Cashrep Url</th>
+        <th>Is Trader</th>
+        <th>Occupation</th>
+        <th>Setup Completed</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td><%= @user.email %></td>
+        <td><%= @user.first_name %></td>
+        <td><%= @user.last_name %></td>
+        <td><%= @user.phone_number %></td>
+        <td><%= @user.created_at.in_time_zone(-4).strftime('%m/%d/%Y %l:%M%p') %></td>
+        <td><%= @user.profile_url %></td>
+        <td><%= @user.trade_url %></td>
+        <td><%= @user.cashrep_url %></td>
+        <td><%= @user.is_trader %></td>
+        <td><%= @user.occupation %></td>
+        <td><%= @user.setup_completed %></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>User's Loans:</h3>
+
+  <table class="ui celled striped table">
+    <thead>
+      <tr>
+        <th>Status</th>
+        <th>Keys</th>
+        <th>Due at</th>
+        <th>Collateral Item</th>
+        <th>Date Submitted</th>
+        <th>Points Used</th>
+        <th>Admin Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @user.loan.order('created_at desc').each do |loan| %>
+        <tr>
+          <td><%= loan.status %></td>
+          <td><%= loan.keys %></td>
+          <td><%= loan.due_at.present? ? loan.due_at.in_time_zone(-4).strftime('%m/%d/%Y %l:%M%p') : '' %></td>
+          <td><%= loan.collateral %></td>
+          <td><%= loan.created_at.in_time_zone(-4).strftime('%m/%d/%Y %l:%M%p') %></td>
+          <td><%= loan.points_used %></td>
+          <td><%= link_to 'Edit', edit_loan_path(loan) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,12 @@
+<a href="/dashboard" class='ui primary button'>< Back to Dashboard</a>
+
+<% if current_user.superuser? %>
+  <h1 class='form-page-title'>Editing Loan</h1>
+<% else %>
+  <h1 class='form-page-title'>Returning Loan</h1>
+<% end %>
+
+<%= render 'form', loan: @loan %>
+
+<!-- <%= link_to 'Show', @loan %> | -->
+

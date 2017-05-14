@@ -1,0 +1,22 @@
+<p>
+  <strong>Status:</strong>
+  <%= @loan.status %>
+</p>
+
+<p>
+  <strong>Keys:</strong>
+  <%= @loan.keys %>
+</p>
+
+<p>
+  <strong>Due at:</strong>
+  <%= @loan.due_at.in_time_zone(-4).strftime('%m/%d/%Y %l:%M%p') %>
+</p>
+
+<p>
+  <strong>Collateral:</strong>
+  <%= @loan.collateral %>
+</p>
+
+<%= link_to 'Edit', edit_loan_path(@loan) %> |
+<%= link_to 'Back', loans_path %>

@@ -1,0 +1,8 @@
+<% if user_signed_in? %>
+  <li><%= link_to 'SIGNOUT', signout_path %></li>
+<% else %>
+  <li class='steam-container'>
+    <%= link_to image_tag("/steam.png", border: 0, class: "steam_signin"), {action: 'new', controller: 'sessions'} %>
+  </li>
+<% end %>
+

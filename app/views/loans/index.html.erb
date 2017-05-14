@@ -1,0 +1,208 @@
+<div class='dashboard-container'>
+  <div class='dashboard-content'>
+    <h1>Loans</h1>
+
+    <div class='loan-table-container'>
+      <table class="ui celled striped table">
+        <thead>
+          <tr>
+            <th>Status</th>
+            <th>Keys</th>
+            <th>Keys Due</th>
+            <th>Due at</th>
+            <th>Collateral Item</th>
+
+            <% if !current_user.superuser? %>
+              <th>Actions</th>
+            <% end %>
+
+            <% if current_user.superuser? %>
+              <th>User</th>
+              <th>Date Submitted</th>
+              <th>Points Used</th>
+              <th>Admin Actions</th>
+            <% end %>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @loans.each do |loan| %>
+            <tr>
+              <td><%= loan.status %></td>
+              <td><%= loan.keys %></td>
+              <td>
+                <a data-toggle="modal" data-target="#modal-return">
+                  <%= (loan.keys * (1.01 ** ((loan.due_at - loan.created_at) / 86400).floor)).round %>
+                </a>
+              </td>
+              <td><%= loan.due_at.present? ? loan.due_at.in_time_zone(-4).strftime('%m/%d/%Y %l:%M%p') : '' %></td>
+              <td><%= loan.collateral %></td>
+              <% if !current_user.superuser? %>
+                <td>
+                  <% if loan.status == 'accepted' %>
+                    <%= link_to 'Return loan', edit_loan_path(loan) %>
+                  <% end %>
+                </td>
+              <% end %>
+
+              <% if current_user.superuser? %>
+                <td><%= link_to loan.user.name, user_path(loan.user_id) %></td>
+                <td><%= loan.created_at.in_time_zone(-4).strftime('%m/%d/%Y %l:%M%p') %></td>
+                <td><%= loan.points_used %></td>
+                <td><%= link_to 'Edit', edit_loan_path(loan) %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <% if @loans.length == 0 %>
+        <div>You don't currently have any loan applications! Apply for one today.</div>
+      <% end %>
+    </div>
+
+    <% if !current_user.superuser? %>
+      <div class='referral-container'>
+        <h2>Referral Points</h2>
+
+        <div>Refer someone today! Your friend will also receive 25 points if they sign up, and you'll receive 1 points for each referral and 100 points if your friend completes a loan. 100 points = a free key!</div>
+        <div class='referral-link'>Your Referral Link: <b><%= 'http://www.csgokeybank.com/signup?ref=' + current_user.referral_code %></b></div>
+
+        <div>You currently have <%= pluralize(current_user.total_points, "point") %>.</div>
+        <div>You have spent <%= pluralize(current_user.points_used, "point") %>.</div>
+        <div>You have earned <%= pluralize(current_user.points_earned, "point") %> so far through referrals.</div>
+
+        <% if current_user.referrals.length > 0 %>
+          <div>Your referrals:</div>
+          <% current_user.referrals.each do |referral| %>
+            <div><%= referral.referree.name %></div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class='profile-sidebar'>
+    <img class='profile-picture' src=<%= current_user.image_url %>/>
+    <div class="ui horizontal statistics">
+    <div class="statistic">
+      <div class="value">
+        <i class="fa fa-trophy"></i>
+      </div>
+      <div class="label">
+        <% if current_user.superuser? %>
+          Admin Panel
+        <% else %>
+          <%= current_user.name %>
+        <% end %>
+      </div>
+    </div>
+    <div class="statistic">
+      <div class="value">
+        <i class="fa fa-envelope-o"></i>
+      </div>
+      <div class="label">
+        <%= current_user.email %>
+      </div>
+    </div>
+
+    <% if !current_user.superuser? %>
+      <div class="statistic">
+        <div class="value">
+          <i class="fa fa-clock-o"></i>
+        </div>
+        <div class="label">
+          <%= current_user.created_at.strftime('%b. %Y') %>
+        </div>
+      </div>
+    <% end %>
+
+    <% if current_user.superuser? %>
+      <a type="button" class="ui massive button primary get-keys-button" href="/users">
+      View all users
+    </a>
+    <% else %>
+      <a type="button" class="ui massive button primary get-keys-button" href="/loans/new">
+      Get keys today!
+    </a>
+    <% end %>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade submitted-modal" id="modal-return" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Key Loan Interest Information</h4>
+      </div>
+      <div class="modal-body">
+        <div>We charge a flat fee of 1% interest per day.</div>
+        <div>For example, a loan of 100 keys for 3 days would be: 100 keys * 1.01 * 1.01 * 1.01 = 103 keys.</div>
+        <br>
+        <div>If you have any questions, please contact us in the live chat!</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<% if params['success'] == 'true'%>
+  <!-- Modal -->
+  <div class="modal fade submitted-modal" data-backdrop="false" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Application submitted!</h4>
+        </div>
+        <div class="modal-body">
+          Key Loan Confirmed. Please check your email and dashboard for your application status. Our review process takes less than a day.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    $(window).load(function() {
+      $('#myModal').modal('show');
+    });
+  </script>
+<% end %>
+
+<% if params['return'] == 'true'%>
+  <!-- Modal -->
+  <div class="modal fade submitted-modal" data-backdrop="false" id="returnModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Loan return submitted!</h4>
+        </div>
+        <div class="modal-body">
+          Thank you. We have received your return request and will process it shortly.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    $(window).load(function() {
+      $('#returnModal').modal('show');
+    });
+  </script>
+<% end %>
+
+
+

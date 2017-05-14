@@ -1,0 +1,167 @@
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  cursor: pointer;
+}
+
+.loan-form {
+  width: 40%;
+  padding: 50px !important;
+  text-align: left !important;
+  margin: 40px auto !important;
+}
+
+.new-loan-button {
+  &:visited {
+    color: white;
+  }
+}
+
+.user-detail {
+  padding: 30px;
+}
+
+.form-control {
+  border-radius: 0px !important;
+}
+
+.form-textarea {
+  height: 150px !important;
+}
+
+.loan-submit-container {
+  margin-top: 30px;
+  margin-bottom: 0px !important;
+}
+
+.modal-title {
+  color: black;
+}
+
+.modal-body {
+  color: black;
+
+  p {
+    font-family: 'Roboto Condensed', sans-serif !important;
+  }
+}
+
+.datepicker-days, .datepicker-months, .datepicker-years {
+  .datepicker-switch {
+    color: #2b3e50;
+    font-size: 25px;
+  }
+
+  .prev, .next {
+    color: #DF691A;
+    font-size: 20px;
+  }
+
+  .day, .month, .year {
+    color: #2b3e50;
+  }
+
+  .new, .old {
+    color: #2b3e50 !important;
+  }
+
+  .disabled {
+    color: #ccc !important;
+  }
+}
+
+td {
+  font-family: 'Roboto Condensed', sans-serif !important;
+  padding: 10px !important;
+}
+
+th {
+  padding-left: 10px !important;
+}
+
+.submitted-modal {
+  top: 300px;
+}
+
+// .loan-table-container {
+//   width: 70%;
+// }
+
+.profile-picture {
+  width: 120px;
+  margin-bottom: 30px;
+  margin-top: 100px;
+}
+
+.dashboard-container {
+  display: flex;
+
+  .dashboard-content {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    margin-right: 325px;
+  }
+
+  .profile-sidebar {
+    position: fixed;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding-left: 30px;
+    padding-right: 30px;
+    background-color: #22313f;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    background-color: #22313f;
+
+    .get-keys-button {
+      margin-top: 30px;
+    }
+  }
+
+  .referral-container {
+    margin-top: 20px;
+
+    .referral-link {
+      text-align: center;
+      background-color: #22313f;
+      margin: 20px 0px;
+      padding: 20px 0px;
+    }
+  }
+}
+
+.statistics {
+  align-items: flex-end !important;
+}
+
+.trade-link {
+  margin-bottom: 20px;
+  display: inline-block;
+  color: white;
+  text-decoration: underline;
+
+  &:visited {
+    color: white;
+  }
+}
+
+.account-setup-blurb {
+  margin-top: 30px;
+  text-align: center;
+
+  .account-setup-blurb-hi {
+    font-size: 25px;
+    margin-bottom: 20px;
+  }
+}
+
+.form-page-title {
+  text-align: center;
+}
