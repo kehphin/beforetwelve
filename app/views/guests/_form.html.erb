@@ -1,0 +1,37 @@
+<div class='ui center aligned segment loan-form'>
+  <%= form_for(guest) do |f| %>
+    <% if guest.errors.any? %>
+      <div id="error_explanation">
+        <h2>Oops! Your guest application has <%= pluralize(guest.errors.count, "error") %>:</h2>
+
+        <ul>
+        <% guest.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label 'First Name:' %>
+      <%= f.text_field :first_name, 'class': 'form-control', required: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label 'Last name:' %>
+      <%= f.text_field :last_name, 'class': 'form-control', required: true %>
+    </div>
+
+    <div style='display: none' class="field">
+      <%= f.label 'User Referral Code' %>
+      <%= f.text_field :user_referral_code, 'value': params['ref'], 'class': 'form-control' %>
+    </div>
+
+    <div class="actions guest-submit-container">
+      <%= f.submit 'class': 'ui primary button' %>
+    </div>
+  <% end %>
+
+</div>
+
+

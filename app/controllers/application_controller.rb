@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
     end
 
     def user_signed_in?
-      return true if current_user && current_user.setup_completed
+      return true if current_user
     end
 
     def superuser?

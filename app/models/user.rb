@@ -1,19 +1,20 @@
 class User < ApplicationRecord
-  has_many :loan, dependent: :destroy
-
   has_many :referrals, :class_name => 'Referral', :foreign_key => 'referrer_id'
   has_one :referred, :class_name => 'Referral', :foreign_key => 'referree_id'
+
+  has_one :guestlist, dependent: :destroy
 
   def self.create_with_omniauth(auth, query_params)
     created_user = create! do |user|
       user.uid = auth['uid']
       user.superuser = false
-      user.setup_completed = false
-      user.referral_code = generate_referral_code
+      # user.referral_code = generate_referral_code
       if auth['info']
-        user.name = auth['info']['nickname'] || ""
-        user.image_url = auth['info']['image'] || ""
-        user.profile_url = auth['info']['urls']['Profile'] || ""
+        name = auth['info']['name']
+        user.name = name
+        user.image_url = auth['info']['image']
+        user.first_name = name.split(' ').first
+        user.last_name = name.split(' ').last
       end
     end
 
@@ -65,7 +66,7 @@ class User < ApplicationRecord
   end
 
   # 4 random alphanumeric characters
-  def self.generate_referral_code
-    [*('a'..'f'),*('A'..'F'),*('0'..'9')].shuffle[0,4].join
-  end
+  # def self.generate_referral_code
+  #   [*('a'..'f'),*('A'..'F'),*('0'..'9')].shuffle[0,4].join
+  # end
 end

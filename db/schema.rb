@@ -10,53 +10,61 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170413012235) do
+ActiveRecord::Schema.define(version: 20170523030521) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "loans", force: :cascade do |t|
-    t.string   "status"
-    t.integer  "keys"
-    t.datetime "due_at"
-    t.string   "collateral"
-    t.integer  "user_id"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.text     "why_loan"
-    t.integer  "points_used", default: 0
-    t.index ["user_id"], name: "index_loans_on_user_id", using: :btree
+  create_table "guestlists", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_guestlists_on_user_id"
+  end
+
+  create_table "guests", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.boolean "checked_in", default: false
+    t.bigint "guestlist_id"
+    t.bigint "masterlist_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["guestlist_id"], name: "index_guests_on_guestlist_id"
+    t.index ["masterlist_id"], name: "index_guests_on_masterlist_id"
+  end
+
+  create_table "masterlists", force: :cascade do |t|
+    t.string "name"
   end
 
   create_table "referrals", force: :cascade do |t|
-    t.string   "status"
-    t.integer  "referrer_id"
-    t.integer  "referree_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["referree_id"], name: "index_referrals_on_referree_id", using: :btree
-    t.index ["referrer_id"], name: "index_referrals_on_referrer_id", using: :btree
+    t.string "status"
+    t.bigint "referrer_id"
+    t.bigint "referree_id"
+    t.index ["referree_id"], name: "index_referrals_on_referree_id"
+    t.index ["referrer_id"], name: "index_referrals_on_referrer_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "name"
-    t.string   "uid"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "image_url"
-    t.boolean  "superuser",       default: false
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "phone_number"
-    t.string   "email"
-    t.string   "profile_url"
-    t.boolean  "setup_completed", default: false
-    t.string   "trade_url"
-    t.string   "cashrep_url"
-    t.string   "occupation"
-    t.boolean  "is_trader"
-    t.string   "referral_code"
+    t.string "name"
+    t.string "uid"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "phone_number"
+    t.string "referral_code"
+    t.boolean "superuser", default: false
+    t.string "image_url"
   end
 
-  add_foreign_key "loans", "users"
+  create_table "venues", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "guestlists", "users"
+  add_foreign_key "guests", "guestlists"
+  add_foreign_key "guests", "masterlists"
 end
