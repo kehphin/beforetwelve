@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170523030521) do
+ActiveRecord::Schema.define(version: 20170604222319) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "check_ins", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "venue_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "guest_id"
+    t.boolean "master_checkin", default: false
+    t.boolean "plusone_checkin", default: false
+    t.index ["guest_id"], name: "index_check_ins_on_guest_id"
+    t.index ["user_id"], name: "index_check_ins_on_user_id"
+    t.index ["venue_id"], name: "index_check_ins_on_venue_id"
+  end
 
   create_table "guestlists", force: :cascade do |t|
     t.string "name"
@@ -27,12 +40,10 @@ ActiveRecord::Schema.define(version: 20170523030521) do
     t.string "first_name"
     t.string "last_name"
     t.boolean "checked_in", default: false
-    t.bigint "guestlist_id"
-    t.bigint "masterlist_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["guestlist_id"], name: "index_guests_on_guestlist_id"
-    t.index ["masterlist_id"], name: "index_guests_on_masterlist_id"
+    t.string "name"
+    t.boolean "plusone", default: false
   end
 
   create_table "masterlists", force: :cascade do |t|
@@ -56,15 +67,21 @@ ActiveRecord::Schema.define(version: 20170523030521) do
     t.string "referral_code"
     t.boolean "superuser", default: false
     t.string "image_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean "setup_completed"
+    t.string "email"
   end
 
   create_table "venues", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "active", default: true
   end
 
+  add_foreign_key "check_ins", "guests"
+  add_foreign_key "check_ins", "users"
+  add_foreign_key "check_ins", "venues"
   add_foreign_key "guestlists", "users"
-  add_foreign_key "guests", "guestlists"
-  add_foreign_key "guests", "masterlists"
 end

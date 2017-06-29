@@ -44,7 +44,7 @@ class GuestsController < ApplicationController
     referred_guestlist_id = User.find_by(referral_code: hash_params['user_referral_code'])&.guestlist&.id
     hash_params.delete('user_referral_code')
 
-    @guest = Guest.new(hash_params.merge(guestlist_id: referred_guestlist_id, masterlist_id: 1))
+    @guest = Guest.new(hash_params.merge(guestlist_id: referred_guestlist_id, masterlist_id: 1, name: "#{hash_params['first_name']} #{hash_params['last_name']}"))
 
     respond_to do |format|
       if @guest.save

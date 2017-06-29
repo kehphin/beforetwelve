@@ -1,3 +1,4 @@
+/*
 !function() {
   var t;
   if (t = window.driftt = window.drift = window.driftt || [], !t.init) return t.invoked ? void (window.console && console.error && console.error("Drift snippet included twice.")) : (t.invoked = !0,
@@ -18,3 +19,4 @@
 }();
 drift.SNIPPET_VERSION = '0.3.1';
 drift.load('ncez8cd6axf4');
+*/

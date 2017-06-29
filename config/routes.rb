@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :users
   resources :guests
   resources :masterlists
+  resources :check_ins
 
   root to: 'visitors#index'
   # get '/auth/:provider/callback' => 'sessions#create'
@@ -14,9 +15,13 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :masterlists, only: [:create]
+    resources :users, only: [:index, :show]
+    resources :guests, only: [:index, :show]
+    resources :venues, only: [:index]
+    resources :check_ins, only: [:create]
   end
 
-  get '/dashboard', to: 'guests#index', :as => :dashboard
+  get '/dashboard', to: 'users#index', :as => :dashboard
 
   get '/setup', to: 'setup#index', :as => :setup
 

@@ -10,11 +10,10 @@ class User < ApplicationRecord
       user.superuser = false
       # user.referral_code = generate_referral_code
       if auth['info']
-        name = auth['info']['name']
-        user.name = name
         user.image_url = auth['info']['image']
-        user.first_name = name.split(' ').first
-        user.last_name = name.split(' ').last
+        user.first_name = auth['info']['first_name']
+        user.last_name = auth['info']['last_name']
+        user.name = "#{auth['info']['first_name']} #{auth['info']['last_name']}"
       end
     end
 

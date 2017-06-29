@@ -8,6 +8,8 @@ class ApplicationController < ActionController::Base
   helper_method :superuser?
   helper_method :correct_user?
 
+  include Response
+
   private
     def current_user
       begin

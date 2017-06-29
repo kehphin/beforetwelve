@@ -1,0 +1,48 @@
+<div class='dashboard-container'>
+  <div class='dashboard-content'>
+    <h1>Check Ins</h1>
+
+    <div class='loan-table-container'>
+      <table class="ui celled striped table">
+        <thead>
+          <tr>
+            <th>Host Name</th>
+            <th>Guest Name</th>
+            <th>Masterlist</th>
+            <th>Masterlist +1</th>
+            <th>Venue Name</th>
+            <th>Time Checked In</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @check_ins.each do |check_in| %>
+            <tr>
+              <td><%= check_in.user&.name %></td>
+              <td><%= check_in.guest&.name %></td>
+              <td>
+                <% if check_in.master_checkin %>
+                  <a class='fa fa-check'></a>
+                <% end %>
+              </td>
+              <td>
+                <% if check_in.plusone_checkin %>
+                  <a class='fa fa-check'></a>
+                <% end %>
+              </td>
+              <td><%= check_in.venue.name %></td>
+              <td>
+                <%= check_in.created_at.in_time_zone('America/New_York').strftime('%m/%d/%Y %l:%M%p') %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <% if @check_ins.length == 0 %>
+        <div>You don't currently have any loan applications! Apply for one today.</div>
+      <% end %>
+    </div>
+  </div>
+</div>
+

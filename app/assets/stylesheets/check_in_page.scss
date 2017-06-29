@@ -1,0 +1,55 @@
+.checkin-container {
+  margin: 30px;
+}
+
+.checkin-tables-container {
+  display: flex;
+  margin-top: 20px;
+}
+
+.checkin-table-container {
+  &:first-child {
+    margin-right: 20px;
+  }
+}
+
+.checkin-user-table {
+  width: 500px !important;
+}
+
+.checkin-guest-table {
+  width: 400px !important;
+}
+
+.checkin-table-row {
+  span {
+    margin-top: 10px;
+    display: inline-block;
+  }
+}
+
+.default-checkin-button {
+  a {
+    color: white;
+  }
+
+  &:not(:first-child) {
+    margin-left: 10px;
+  }
+}
+
+.venue-header {
+  width: 130px;
+}
+
+.name-header {
+  width: 150px;
+}
+
+.plusone-header {
+  width: 50px;
+}
+
+.button-table-item {
+  text-align: center !important;
+}

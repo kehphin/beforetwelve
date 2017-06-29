@@ -30,6 +30,10 @@
     "webpack-merge": "^4.1.0"
   },
   "devDependencies": {
+    "react-modal": "^1.7.7",
+    "webpacker-react": "^0.3.0",
+    "react-search-input": "^0.11.2",
+    "underscore": "^1.8.3",
     "webpack-dev-server": "^2.4.5"
   }
 }

@@ -3,6 +3,7 @@ ruby '2.3.1'
 gem 'rails', '~> 5.1'
 gem 'pg'
 gem 'webpacker', github: 'rails/webpacker'
+gem 'webpacker-react', "~> 0.3.1"
 gem 'omniauth-steam'
 gem 'figaro'
 gem 'puma', '~> 3.0'
