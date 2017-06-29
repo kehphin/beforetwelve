@@ -280,15 +280,13 @@ main {
   margin: 30px 0px;
 }
 
-.detail-container {
-  background-image: url("../HomeFirst.jpg");
 
+
+.detail-container {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.9)), url("../lights.jpg");
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 100px 0px;
-  text-align: center;
+  padding: 10px 40px;
 
   line-height: 40px;
   background-repeat: no-repeat;
@@ -296,9 +294,200 @@ main {
   background-size: cover;
 }
 
-.how-loan-container {
-  @extend .detail-container;
-  background-image: url("../HomeSecond.jpg");
+.logo-pink {
+  height: 170px;
+  margin-left: auto;
+  padding-right: 30px;
+}
+
+.main-panel-title-1 {
+  text-transform: uppercase;
+  font-size: 60px;
+}
+
+.main-panel-title-2 {
+  text-transform: uppercase;
+  margin-top: 30px;
+  margin-bottom: 40px;
+  font-size: 80px;
+}
+
+.main-panel-title-3 {
+  font-size: 30px;
+  width: 65%;
+}
+
+.title-accent {
+  color: #FF00E3;
+}
+
+.main-panel-footer {
+  display: flex;
+  margin-top: 80px;
+  margin-bottom: 20px;
+  justify-content: space-between;
+}
+
+.main-panel-footer-social-logo {
+  height: 40px;
+  margin-right: 15px;
+}
+
+.main-panel-footer-sponsor-logo-whisky {
+  height: 30px;
+  margin-right: 30px;
+}
+
+.main-panel-footer-sponsor-logo-sky {
+  height: 50px;
+  margin-right: 30px;
+}
+
+.main-panel-footer-sponsor-logo-vapegoons {
+  height: 30px;
+  margin-right: 30px;
+}
+
+.slide-container-border {
+  padding-top: 5px;
+  background-image:
+    linear-gradient(
+      to right,
+      #902d8d,
+      #694d91,
+      #387a96,
+      #1AA79C
+    );
+}
+.slide-container {
+  background-color: white;
+  padding: 10px 40px;
+  color: black;
+}
+
+.slide-title {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #CA278F;
+  font-size: 40px;
+  padding: 20px 0px;
+  border-bottom: 3px solid #ddd;
+}
+
+.slide-subtitle {
+  font-size: 24px;
+  margin: 10px 0px;
+}
+
+.slide-content {
+  display: flex;
+}
+
+.slide-content-left {
+  flex: 3;
+  padding-right: 60px;
+  font-size: 18px;
+
+  & > div {
+    margin: 15px 0px;
+  }
+}
+
+.slide-content-right {
+  flex: 2;
+  padding-right: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hexagon-row {
+  display: flex;
+  margin-top: 50px;
+}
+.hexagon-container {
+  width: 180px;
+  height: 140px;
+}
+.hexagon {
+  width: 150px;
+  height: 90px;
+  background: black;
+  position: relative;
+}
+.hexagon:before {
+  content: "";
+  position: absolute;
+  top: -37px;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 75px solid transparent;
+  border-right: 75px solid transparent;
+  border-bottom: 37px solid black;
+}
+.hexagon:after {
+  content: "";
+  position: absolute;
+  bottom: -37px;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 75px solid transparent;
+  border-right: 75px solid transparent;
+  border-top: 37px solid black;
+}
+.hexagon-icon {
+  width: 40px;
+  position: absolute;
+  top: -27px;
+  left: 55px;
+}
+.hexagon-code-icon {
+  top: -20px;
+}
+.hexagon-info {
+  color: white;
+  text-align: center;
+  padding-top: 30px;
+}
+
+.current-promotion {
+  display: flex;
+  align-items: center;
+  text-transform: uppercase;
+}
+.current-club {
+  color: #CA278F;
+  font-size: 25px;
+  margin-right: 15px;
+}
+.current-code {
+  background-color: #bbb;
+  color: white;
+  text-align: center;
+  font-size: 25px;
+  padding: 20px 20px;
+}
+.valid-date {
+  font-size: 12px;
+}
+
+.snapchat-container {
+  display: flex;
+  align-items: center;
+}
+.snapchat-add {
+  width: 100px;
+  height: 100px;
+}
+.snapchat-bullets {
+  line-height: 24px;
+  margin: 5px;
+}
+
+.pay-less-signup {
+  margin-top: 20px;
 }
 
 .cta-item-container {
