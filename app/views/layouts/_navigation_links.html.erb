@@ -2,6 +2,6 @@
 <% if user_signed_in? %>
   <li><%= link_to 'DASHBOARD', dashboard_path %></li>
 <% end %>
-<li><%= link_to 'WHY US?', why_path %></li>
-<li><%= link_to 'PARTNER WITH US', partner_path %></li>
-<li><%= link_to 'FAQ', faq_path %></li>
+<li><%= link_to 'BECOME A HOST', why_path, { :href => "#host" } %></li>
+<li><%= link_to 'PAY LESS TONIGHT', partner_path, { :href => "#pay-less" } %></li>
+<li><%= link_to 'CONTACT', faq_path, { :href => "#contact" } %></li>

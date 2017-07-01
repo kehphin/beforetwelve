@@ -83,7 +83,7 @@ $teal5: #027DA4;
 
 
 .header-logo {
-  width: 150px;
+  width: 250px;
   margin: 0 30px;
 }
 
@@ -130,7 +130,7 @@ $teal5: #027DA4;
 }
 
 .navbar-inverse {
-  opacity: 0.7;
+  background-color: black;
 
   .navbar-nav {
     margin-right: 50px;
@@ -240,7 +240,8 @@ section {
 }
 
 * {
-  font-family: 'Roboto Condensed', sans-serif;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 300;
 }
 
 main {
@@ -328,9 +329,15 @@ main {
   justify-content: space-between;
 }
 
+.footer-social {
+  .social-item-white:hover {
+    background-color: white;
+  }
+}
+
 .main-panel-footer-social-logo {
   height: 40px;
-  margin-right: 15px;
+  padding-right: 15px;
 }
 
 .main-panel-footer-sponsor-logo-whisky {
@@ -346,6 +353,13 @@ main {
 .main-panel-footer-sponsor-logo-vapegoons {
   height: 30px;
   margin-right: 30px;
+}
+
+.anchor {
+  display: block;
+  position: relative;
+  top: -70px;
+  visibility: hidden;
 }
 
 .slide-container-border {
@@ -377,10 +391,15 @@ main {
 .slide-subtitle {
   font-size: 24px;
   margin: 10px 0px;
+  line-height: 30px;
 }
 
 .slide-content {
   display: flex;
+}
+
+.slide-content-vert {
+  flex-direction: column;
 }
 
 .slide-content-left {
@@ -398,7 +417,10 @@ main {
   padding-right: 60px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+}
+
+.align-right {
+  align-items: flex-end;
 }
 
 .hexagon-row {
@@ -449,7 +471,7 @@ main {
 .hexagon-info {
   color: white;
   text-align: center;
-  padding-top: 30px;
+  padding: 25px 5px 0px 5px;
 }
 
 .current-promotion {
@@ -488,6 +510,50 @@ main {
 
 .pay-less-signup {
   margin-top: 20px;
+  font-size: 30px;
+  border-bottom: 1px solid black;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  width: 400px;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.guest-container {
+  margin-top: 30px;
+}
+
+.guest-title {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.guest-venues {
+  margin-top: 10px;
+  -webkit-padding-start: 10px;
+}
+
+.guest-venue-item {
+  font-size: 24px;
+  line-height: 30px;
+  margin-bottom: 20px;
+
+  div:first-child {
+    text-transform: uppercase;
+  }
+}
+
+.contact-social {
+  display: flex;
+  flex-direction: column;
+  margin: 30px 0px;
+
+  a:hover {
+    background-color: white;
+  }
 }
 
 .cta-item-container {
@@ -1016,20 +1082,19 @@ main {
   background: rgba(106,188,100,0.42);
 }
 
-.steam_signin {
-  width: 170px;
+.facebook-login {
+  width: 230px;
   position: absolute;
-  top: 11px;
+  top: 7px;
 }
 
-.steam-container {
+.fb-container {
   position: relative;
-  width: 200px;
+  width: 300px;
   height: 50px;
 
   a {
     height: 50px;
-    width: 220px;
   }
 }
 
