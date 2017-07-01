@@ -7,5 +7,6 @@ class CreateUsers < ActiveRecord::Migration[5.1]
       t.string :last_name
       t.string :phone_number
       t.string :referral_code
+    end
   end
 end
