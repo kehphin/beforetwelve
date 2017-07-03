@@ -21,9 +21,10 @@ Rails.application.routes.draw do
     resources :check_ins, only: [:create]
   end
 
-  get '/dashboard', to: 'users#index', :as => :dashboard
+  get '/dashboard', to: 'dashboard#index', :as => :dashboard
 
   get '/setup', to: 'setup#index', :as => :setup
+  get '/manager', to: 'manager#index', :as => :manager
 
   get '/faq', to: 'pages#faq'
   get '/why', to: 'pages#why'

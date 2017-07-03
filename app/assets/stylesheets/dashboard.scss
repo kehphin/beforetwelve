@@ -114,6 +114,7 @@ th {
     bottom: 0;
     padding-left: 30px;
     padding-right: 30px;
+    margin-top: 50px;
     background-color: #22313f;
     display: flex;
     flex-direction: column;
@@ -164,4 +165,8 @@ th {
 
 .form-page-title {
   text-align: center;
+}
+
+.guest-dashboard-greeting {
+  margin-top: 50px;
 }

@@ -52,17 +52,18 @@ export default class CheckInRoot extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='checkin-dash-container'>
+        <div className='checkin-manager'>Check In Manager</div>
         <DefaultCheckIn venues={this.state.venues} handleCheckIn={(e, attrs) => this.handleCheckIn(e, attrs)}/>
 
         <div className='checkin-tables-container'>
           <div className='checkin-table-container'>
-            <h3>Host Check In</h3>
+            <h3>Lookup by Host Name</h3>
             <UserTable venues={this.state.venues} handleCheckIn={(e, attrs) => this.handleCheckIn(e, attrs)}/>
           </div>
 
           <div className='checkin-table-container'>
-            <h3>Guest Check In</h3>
+            <h3>Lookup by Guest Name</h3>
             <GuestTable venues={this.state.venues} handleCheckIn={(e, attrs) => this.handleCheckIn(e, attrs)}/>
           </div>
         </div>
