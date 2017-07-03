@@ -2,13 +2,52 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "CS:GO Keybank" %></title>
-    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "CS:GO Keybank" %>">
+    <title><%= content_for?(:title) ? yield(:title) : "BeforeTwelve" %></title>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "BeforeTwelve" %>">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <div id="drift-widget-container" data-turbolinks-permanent></div>
     <%= csrf_meta_tags %>
     <%= javascript_pack_tag 'check_in_page' %>
+
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId            : '831424270346531',
+          autoLogAppEvents : true,
+          xfbml            : true,
+          version          : 'v2.9'
+        });
+        FB.AppEvents.logPageView();
+      };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <script>
+      window.twttr = (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0],
+        t = window.twttr || {};
+      if (d.getElementById(id)) return t;
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "https://platform.twitter.com/widgets.js";
+      fjs.parentNode.insertBefore(js, fjs);
+
+      t._e = [];
+      t.ready = function(f) {
+        t._e.push(f);
+      };
+
+      return t;
+    }(document, "script", "twitter-wjs"));
+  </script>
   </head>
   <body>
     <header>

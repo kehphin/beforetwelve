@@ -180,8 +180,12 @@
 
         <% if current_user.superuser? %>
           <a type="button" class="ui massive button primary get-keys-button" href="/manager">
-          Check in manager
-        </a>
+            Check-In Manager
+          </a>
+        <% else %>
+          <h2>Promote your events:</h2>
+          <%= react_component 'Social' %>
+
         <% end %>
       </div>
     </div>
