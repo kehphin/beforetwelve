@@ -6,18 +6,20 @@
       <table class="ui celled striped table">
         <thead>
           <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
+            <th>Name</th>
             <th>Checked In</th>
+            <th>Plus One</th>
+            <th>Date Created</th>
           </tr>
         </thead>
 
         <tbody>
           <% @guests.each do |guest| %>
             <tr>
-              <td><%= guest.first_name %></td>
-              <td><%= guest.last_name %></td>
+              <td><%= guest.name %></td>
               <td><%= guest.checked_in %></td>
+              <td><%= guest.plusone %></td>
+              <td><%= guest.created_at.in_time_zone('America/New_York').strftime('%m/%d/%Y %l:%M%p') %></td>
             </tr>
           <% end %>
         </tbody>

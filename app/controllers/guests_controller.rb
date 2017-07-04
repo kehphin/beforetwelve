@@ -41,20 +41,27 @@ class GuestsController < ApplicationController
   def create
     hash_params = guest_params.to_h
     # Find who's referral code they used and find the one-to-one guest list association
-    referred_guestlist_id = User.find_by(referral_code: hash_params['user_referral_code'])&.guestlist&.id
-    hash_params.delete('user_referral_code')
+    # referred_guestlist_id = User.find_by(referral_code: hash_params['user_referral_code'])&.guestlist&.id
+    # hash_params.delete('user_referral_code')
 
-    @guest = Guest.new(hash_params.merge(guestlist_id: referred_guestlist_id, masterlist_id: 1, name: "#{hash_params['first_name']} #{hash_params['last_name']}"))
+    # @guest = Guest.new(hash_params.merge(guestlist_id: referred_guestlist_id, masterlist_id: 1, name: "#{hash_params['first_name']} #{hash_params['last_name']}"))
 
-    respond_to do |format|
-      if @guest.save
-        format.html { redirect_to '/guests?success=true', notice: 'Guest was successfully created.', something: 'else' }
-        format.json { render :show, status: :created, location: @guest }
-      else
-        format.html { render :new }
-        format.json { render json: @guest.errors, status: :unprocessable_entity }
-      end
-    end
+    @guest = Guest.new(hash_params)
+    @guest.save
+    @submitted = true
+
+    head :no_content
+
+    # respond_to do |format|
+    #   if @guest.save
+    #     head :no_content
+    #     # format.html { redirect_to '/guests?success=true', notice: 'Guest was successfully created.', something: 'else' }
+    #     # format.json { render :show, status: :created, location: @guest }
+    #   else
+    #     format.html { render :new }
+    #     format.json { render json: @guest.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PATCH/PUT /loans/1
@@ -94,7 +101,7 @@ class GuestsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def guest_params
-    params.required(:guest).permit(:first_name, :last_name, :checked_in, :user_referral_code)
+    params.required(:guest).permit(:first_name, :last_name, :name, :checked_in, :user_referral_code)
   end
 
   # def sorted_loans(loans)
