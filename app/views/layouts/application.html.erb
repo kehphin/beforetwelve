@@ -11,9 +11,10 @@
     <%= javascript_pack_tag 'check_in_page' %>
 
     <script>
+      var appId = <%= Rails.application.config.x.facebook_app_id %>;
       window.fbAsyncInit = function() {
         FB.init({
-          appId            : '831424270346531',
+          appId            : appId,
           autoLogAppEvents : true,
           xfbml            : true,
           version          : 'v2.9'

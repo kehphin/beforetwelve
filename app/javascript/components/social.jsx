@@ -23,7 +23,6 @@ export default class Social extends React.Component {
             Tweet
           </a>
         </div>
-
       </div>
     );
   }
