@@ -59,8 +59,7 @@ export default class GuestTable extends React.Component {
         <table className="ui celled striped table checkin-guest-table">
           <thead>
             <tr>
-              <th className='name-header'>First Name</th>
-              <th className='name-header'>Last Name</th>
+              <th className='name-header'>Name</th>
               <th className='plusone-header'>+1</th>
 
               {this.props.venues.map(venue => (
@@ -72,8 +71,7 @@ export default class GuestTable extends React.Component {
           <tbody>
             {this.state.guests.map(guest => (
               <tr className='checkin-table-row' key={guest.id}>
-                <td><span>{guest.first_name}</span></td>
-                <td><span>{guest.last_name}</span></td>
+                <td><span>{guest.name}</span></td>
                 <td><span>{guest.plusone ? <i className="fa fa-check"></i> : <i className="fa fa-times"></i>}</span></td>
 
                 {this.props.venues.map(venue => (

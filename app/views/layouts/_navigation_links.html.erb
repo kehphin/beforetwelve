@@ -2,6 +2,7 @@
 <% if user_signed_in? %>
   <li><%= link_to 'DASHBOARD', dashboard_path, { :class => "nav-title-item" } %></li>
 <% end %>
+<li><%= link_to 'HOME', why_path, { :href => "/", :class => "nav-title-item" } %></li>
 <li><%= link_to 'BECOME A HOST', why_path, { :href => "/#host", :class => "nav-title-item" } %></li>
 <li><%= link_to 'PAY LESS TONIGHT', partner_path, { :href => "/#pay-less", :class => "nav-title-item" } %></li>
 <li><%= link_to 'CONTACT', faq_path, { :href => "/#contact", :class => "nav-title-item" } %></li>
