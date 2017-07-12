@@ -5,7 +5,7 @@ export default class Social extends React.Component {
     FB.ui({
       method: 'feed',
       link: 'http://beforetwelve.club',
-      caption: 'Use BeforeTwelve as your #1 Clubbing Promoter',
+      caption: "Check out tonight's event, it's gonna be lit! - Your BeforeTwelve promoter",
     }, function(response){});
   }
 
