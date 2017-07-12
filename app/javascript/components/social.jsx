@@ -4,8 +4,8 @@ export default class Social extends React.Component {
   shareFacebook(e) {
     FB.ui({
       method: 'feed',
-      link: "Check out tonight's event, it's gonna be lit! - Your BeforeTwelve promoter",
-      caption: "Check out tonight's event, it's gonna be lit! - Your BeforeTwelve promoter",
+      caption: 'Use BeforeTwelve as your #1 Clubbing Promoter',
+      link: 'http://beforetwelve.club',
     }, function(response){});
   }
 
