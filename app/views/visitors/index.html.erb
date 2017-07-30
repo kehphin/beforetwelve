@@ -120,7 +120,8 @@
           var $guest_button = $('.new-guest-button');
           var $guest_form = $('#new_guest');
 
-          $guest_button.click(function() {
+          $guest_button.click(function(e) {
+            e.preventDefault();
 
             var name = $('.pay-less-signup').val();
 
