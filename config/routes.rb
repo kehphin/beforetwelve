@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   namespace :api do
     resources :masterlists, only: [:create]
     resources :users, only: [:index, :show]
-    resources :guests, only: [:index, :show]
+    resources :guests, only: [:index, :show, :create]
     resources :venues, only: [:index]
     resources :check_ins, only: [:create]
   end
