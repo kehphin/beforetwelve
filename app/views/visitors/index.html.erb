@@ -112,7 +112,7 @@
       <%= form_for(@guest) do |f| %>
         <%= f.text_field :name, class: 'pay-less-signup', placeholder: 'ENTER YOUR FULL NAME...' %>
         <%= f.submit 'Add to guest list', class: 'ui primary button hidden-button', remote: true %>
-        <button class="ui primary button new-guest-button">Add to Guest List</button>
+        <a class="ui primary button new-guest-button">Add to Guest List</a>
       <% end %>
 
       <script>
@@ -121,11 +121,12 @@
           var $guest_form = $('#new_guest');
 
           $guest_button.click(function() {
+
             var name = $('.pay-less-signup').val();
 
             $guest_form.trigger('submit.rails');
             $guest_button.html(name + ' added to guest list!');
-            $guest_button.attr('disabled', 'disabled');
+            $guest_button.addClass('disabled');
           });
         });
       </script>

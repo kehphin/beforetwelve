@@ -167,6 +167,14 @@ $teal5: #027DA4;
 .new-guest-button {
   margin-top: 20px !important;
   background-color: #CA278F !important;
+
+  &.disabled {
+    cursor: default;
+    opacity: .45!important;
+    background-image: none!important;
+    box-shadow: none!important;
+    pointer-events: none!important;
+  }
 }
 
 // make all images responsive by default
